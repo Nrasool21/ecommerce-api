@@ -6,15 +6,18 @@ const { Category, Product } = require('../../models');
 router.get('/', (req, res) => {
   // find all categories
   // be sure to include its associated Products
+  res.send("get all")
 });
 
 router.get('/:id', (req, res) => {
   // find one category by its `id` value
   // be sure to include its associated Products
+  res.send("get one");
 });
 
 router.post('/', (req, res) => {
   // create a new category
+  res.send("create one");
 });
 
 router.put('/:id', (req, res) => {
