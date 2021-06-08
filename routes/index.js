@@ -4,6 +4,7 @@ const apiRoutes = require("./api");
 
 const router = Router();
 
+
 router.use("/api", apiRoutes);
 
 router.use((req, res) => {
