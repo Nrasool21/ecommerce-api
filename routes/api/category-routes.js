@@ -1,3 +1,5 @@
+const { v4: uuidv4 } = require("uuid");
+
 const router = require("express").Router();
 const { Category, Product } = require("../../models");
 
@@ -10,26 +12,43 @@ router.get("/", async (req, res) => {
   // be sure to include its associated Products
   try {
     let category = await Category.findAll({
-       include: [Product],
-      },
-    );
+      include: [Product],
+    });
     res.json(category);
-  } catch (error){
-    console.log("Not working", error)
+  } catch (error) {
+    console.log("Not working", error);
   }
-
-  
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", async (req, res) => {
   // find one category by its `id` value
-  // be sure to include its associated Products
-  res.send("get one");
+  try {
+    const { id } = req.params;
+    const categoryById = await Category.findOne(
+      { where: { id: id } } && {
+        include: [Product],
+      }
+    );
+    res.json(categoryById);
+  } catch (error) {
+    console.log("not working", error);
+  }
 });
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   // create a new category
-  res.send("create one");
+  try {
+    const data = {
+      udi: uuidv4(),
+      category_name: req.body.category_name,
+    };
+    const newCategory = await Category.create(data);
+
+    res.json(newCategory);
+  } catch (error) {
+    console.log("not working", error)
+  }
+  
 });
 
 router.put("/:id", (req, res) => {
