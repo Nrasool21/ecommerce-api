@@ -46,19 +46,36 @@ router.post("/", async (req, res) => {
 
     res.json(newCategory);
   } catch (error) {
-    console.log("not working", error)
+    console.log("not working", error);
   }
-  
 });
 
-router.put("/:id", (req, res) => {
+router.put("/:id", async (req, res) => {
   // update a category by its `id` value
-  res.send("update");
+  try {
+    const { id } = req.params;
+    const newData = {
+      category_name: req.body.category_name,
+    };
+    await Category.update(newData, {
+      where: { id: id },
+      returning: true,
+    });
+    res.json({ success: true });
+  } catch (error) {
+    console.log("not working", error);
+  }
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", async (req, res) => {
   // delete a category by its `id` value
-  res.send("delete");
+  try {
+    const { id } = req.params;
+    await Category.destroy({ where: { id: id } });
+    res.json({ success: true });
+  } catch (error) {
+    console.log("not working", error);
+  }
 });
 
 module.exports = router;
