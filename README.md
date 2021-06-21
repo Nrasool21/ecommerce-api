@@ -24,3 +24,6 @@ My task was to build the back end for an e-commerce site. I had to configure a w
 
 ## Links
 
+[video link](https://drive.google.com/file/d/1RQzi_Zj3HTQ0ERbcvQHhbKz68F-2FXXi/view)
+
+
